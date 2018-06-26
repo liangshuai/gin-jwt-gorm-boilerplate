@@ -11,4 +11,5 @@ request.token
 !/vendor/vendor.json
 dockerfile
 todo.md
+.DS_Store
 service.pid
