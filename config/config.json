@@ -1,0 +1,53 @@
+{
+    "debug": {
+        "public": "public",
+        "domain": "localhost:8080",
+        "session_secret": "session-secret-phrase",
+        "signup_enabled": true,
+        "pid_file": "service.pid",
+        "database": {
+            "host": "127.0.0.1",
+            "port": 5432,
+            "name": "ginbasic_dev",
+            "user": "liangshuai",
+            "password": ""
+        },
+        "realm": "Develop",
+        "secret": "fudisfjlije894950dsfad9s899080989d",
+        "ttl": 12
+    },
+    "release": {
+        "public": "path_to_public_dir",
+        "domain": "mydomain.com",
+        "session_secret": "session-secret-phrase",
+        "signup_enabled": false, 
+        "pid_file": "service.pid",
+        "realm": "Production",
+        "secret": "fudisfjlije894950dsfad9s899080989d",
+        "ttl": 12,
+        "database": {
+            "host": "192.168.0.1",
+            "port": 5432,
+            "name": "ginbasic_dev",
+            "user": "your_db_user",
+            "password": "your_db_user_password"
+        }
+    },
+    "test": {
+        "public": "public",
+        "domain": "localhost:8080",
+        "session_secret": "session-secret-phrase",
+        "signup_enabled": true,
+        "pid_file": "service.pid",
+        "realm": "Test",
+        "secret": "fudisfjlije894950dsfad9s899080989d",
+        "ttl": 12,
+        "database": {
+            "host": "192.168.0.1",
+            "port": 5432,
+            "name": "ginbasic_dev",
+            "user": "your_db_user",
+            "password": "your_db_user_password"
+        }
+    }
+  }

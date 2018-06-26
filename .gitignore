@@ -1,0 +1,14 @@
+*.exe
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+*.db
+request.token
+/log/
+# /vendor/*   golang.org 被屏蔽， 把相关的包也提交，方便直接使用
+!/vendor/vendor.json
+dockerfile
+todo.md
+service.pid
