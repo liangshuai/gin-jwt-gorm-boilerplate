@@ -10,14 +10,12 @@ import (
 	"github.com/liangshuai/retu/model"
 	// "github.com/liangshuai/retu/controllers"
 	"github.com/gin-gonic/gin"
-	"fmt"
 )
 
 func main() {
 	initLogger()
 	system.LoadConfig()
 	config := system.GetConfig()
-	fmt.Println(system.GetConnectionString())
 	model.InitDB(system.GetConnectionString())
 	model.AutoMigrate()
 	system.Init(
@@ -27,6 +25,7 @@ func main() {
 	)
 	engine := gin.New()
 	engine.Use(gin.Recovery())
+	engine.Use(system.CORSMiddleware())
 	InitRoutes(engine)
 	StartServer(engine)
 }

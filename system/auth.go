@@ -8,9 +8,17 @@ import (
 )
 
 var JWT *jwt.GinJWTMiddleware
+var jwtRealm, jwtSecret string
+var jwtTTL int
 
-func Init(jwtRealm string, jwtSecret string, jwtTTL int) {
-	JWT = &jwt.GinJWTMiddleware{
+func Init(realm string, secret string, ttl int) {
+	jwtRealm = realm
+	jwtSecret = secret
+	jwtTTL = ttl
+}
+
+func NewAuthMiddleware(min_level int) *jwt.GinJWTMiddleware {
+	return &jwt.GinJWTMiddleware{
 		Realm:      jwtRealm,
 		Key:        []byte(jwtSecret),
 		Timeout:    time.Hour * time.Duration(jwtTTL),
@@ -26,11 +34,14 @@ func Init(jwtRealm string, jwtSecret string, jwtTTL int) {
 			return username, verified
 		},
 		Authorizator: func(username string, c *gin.Context) bool {
-			if username == "" {
+			correlation, err := model.GetUserRoleByUsername(username)
+			if (err != nil) {
 				return false
-			} else {
+			}
+			if (correlation.ID2 >= uint16(min_level)) {
 				return true
 			}
+			return false
 		},
 		Unauthorized: func(c *gin.Context, code int, message string) {
 			c.JSON(code, gin.H{
